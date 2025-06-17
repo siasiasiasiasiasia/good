@@ -1,85 +1,50 @@
 import streamlit as st
 import random
 
-# CSS로 배경, 별 애니메이션, 텍스트 박스 꾸미기
+# 배경 그라데이션 및 텍스트 스타일을 위한 CSS 삽입
 st.markdown(
     """
     <style>
-    /* 배경 이미지와 전체 스타일 */
-    body {
-        background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1350&q=80');
-        background-size: cover;
-        background-attachment: fixed;
-        color: #e0f7fa;
+    /* 배경 그라데이션 */
+    .stApp {
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        min-height: 100vh;
+        color: white;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* 반짝이는 별 애니메이션 */
-    @keyframes twinkle {
-        0%, 100% {opacity: 1;}
-        50% {opacity: 0.5;}
-    }
-
-    .star {
-        position: fixed;
-        width: 2px;
-        height: 2px;
-        background: white;
-        border-radius: 50%;
-        animation: twinkle 2s infinite ease-in-out;
-    }
-
-    /* 별 여러개 위치 지정 */
-    .star:nth-child(1) {top: 10%; left: 20%; animation-delay: 0s;}
-    .star:nth-child(2) {top: 30%; left: 80%; animation-delay: 1s;}
-    .star:nth-child(3) {top: 50%; left: 40%; animation-delay: 1.5s;}
-    .star:nth-child(4) {top: 70%; left: 60%; animation-delay: 0.5s;}
-    .star:nth-child(5) {top: 85%; left: 25%; animation-delay: 1.2s;}
-
-    /* 본문 박스 스타일 */
-    .main-content {
-        background: rgba(0, 0, 50, 0.6);
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 0 20px #00bcd4;
+    /* 중앙 정렬된 컨테이너 박스 */
+    .main-box {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 2rem 3rem;
+        border-radius: 12px;
         max-width: 600px;
         margin: 3rem auto;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         text-align: center;
     }
 
-    button {
-        background-color: #00acc1;
-        color: white;
-        font-weight: bold;
-        padding: 0.5rem 1.5rem;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+    /* 버튼 스타일 */
+    button[kind="primary"] {
+        background-color: #00bcd4 !important;
+        color: #000 !important;
+        font-weight: 700 !important;
+        padding: 0.7rem 1.5rem !important;
+        border-radius: 10px !important;
+        border: none !important;
+        transition: background-color 0.3s ease !important;
     }
-
-    button:hover {
-        background-color: #00838f;
+    button[kind="primary"]:hover {
+        background-color: #0097a7 !important;
+        color: white !important;
     }
     </style>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
-# 별 div 추가 (fixed 위치라 어디서든 보임)
-st.markdown(
-    """
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown('<div class="main-box">', unsafe_allow_html=True)
 
-# 본문 시작
-st.markdown('<div class="main-content">', unsafe_allow_html=True)
 st.title("🔬 오늘의 과학 꿀팁")
 
 tips = [
