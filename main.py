@@ -1,69 +1,79 @@
+# app.py
 import streamlit as st
 import random
 
-# 배경 그라데이션 및 텍스트 스타일을 위한 CSS 삽입
-st.markdown(
-    """
+# 별이 반짝이는 CSS 효과
+st.markdown("""
     <style>
-    /* 배경 그라데이션 */
-    .stApp {
-        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-        min-height: 100vh;
+    body {
+        background-color: #000;
         color: white;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* 중앙 정렬된 컨테이너 박스 */
-    .main-box {
-        background: rgba(0, 0, 0, 0.5);
-        padding: 2rem 3rem;
-        border-radius: 12px;
-        max-width: 600px;
-        margin: 3rem auto;
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    .starfield {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: black url('https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif') repeat;
+        background-size: cover;
+        opacity: 0.2;
+    }
+
+    .centered-title {
+        text-align: center;
+        font-size: 3em;
+        font-weight: bold;
+        margin-top: 2em;
+    }
+
+    .tip-box {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 2em;
+        margin: 2em auto;
+        width: 80%;
+        font-size: 1.5em;
         text-align: center;
     }
 
-    /* 버튼 스타일 */
-    button[kind="primary"] {
-        background-color: #00bcd4 !important;
-        color: #000 !important;
-        font-weight: 700 !important;
-        padding: 0.7rem 1.5rem !important;
-        border-radius: 10px !important;
-        border: none !important;
-        transition: background-color 0.3s ease !important;
+    .stButton>button {
+        background-color: #1f77b4;
+        color: white;
+        border-radius: 10px;
+        font-size: 1.2em;
+        padding: 0.5em 2em;
+        margin-top: 2em;
     }
-    button[kind="primary"]:hover {
-        background-color: #0097a7 !important;
-        color: white !important;
-    }
+
     </style>
-    """,
-    unsafe_allow_html=True,
-)
+    <div class="starfield"></div>
+""", unsafe_allow_html=True)
 
-st.markdown('<div class="main-box">', unsafe_allow_html=True)
-
-st.title("🔬 오늘의 과학 꿀팁")
-
+# 꿀팁 리스트
 tips = [
-    "🍋 레몬과 베이킹 소다를 섞으면 친환경 청소제가 돼요. 주방 싱크대 청소에 딱!",
-    "💡 LED 전구는 기존 전구보다 에너지 절약 효과가 크고 열도 적게 발생해요.",
-    "🍎 사과를 자른 뒤 레몬즙을 바르면 갈변(갈색 변색)을 막을 수 있어요.",
-    "🌿 실내 식물은 공기 정화뿐만 아니라 집중력 향상에도 도움을 줍니다.",
-    "💧 얼음이 녹을 때 주변 온도가 내려가는 이유는 '흡열 반응' 때문이에요.",
-    "🌞 햇빛을 받으면 우리 몸에서 비타민 D가 만들어져요. 하루 15분만 나가도 충분!",
-    "🧊 얼음을 빨리 녹이려면 소금을 뿌려보세요. 소금물이 얼음의 녹는점을 낮춰서 빨리 녹아요.",
-    "🍯 꿀은 천연 방부제 역할을 해요. 상처에 바르면 감염 예방에 도움됩니다.",
-    "🔥 알루미늄 호일로 음식을 싸면 열이 고르게 분산되어 맛있게 데울 수 있어요.",
-    "🌬️ 바람이 부는 방향은 기압 차이에 따른 현상으로, 간단한 날씨 예측에 활용돼요."
+    "전자레인지를 청소할 땐 레몬물을 데워 증기로 기름때를 쉽게 제거할 수 있어요!",
+    "빛은 진공에서도 이동할 수 있지만 소리는 공기가 없으면 전달되지 않아요.",
+    "우리가 보는 별빛은 수백만 년 전의 과거 모습일 수도 있어요.",
+    "우유에 식초를 넣으면 카세인이 분리되어 플라스틱처럼 굳어요.",
+    "중력은 모든 물체를 끌어당기지만, 질량이 클수록 힘도 세져요.",
+    "탄산음료는 압력을 가하면 이산화탄소가 액체에 녹아있다가 뚜껑을 열면 기체로 빠져나와요.",
+    "달은 지구의 공전에 영향을 주며 조수간만을 유발해요.",
+    "사람의 몸속 물은 약 60% 이상이에요. 수분 섭취는 정말 중요해요!",
 ]
 
-if st.button("오늘의 과학 꿀팁 받기"):
-    tip = random.choice(tips)
-    st.markdown(f"### {tip}")
-else:
-    st.write("버튼을 눌러 오늘의 신기한 과학 꿀팁을 받아보세요! 😊")
+# 제목
+st.markdown("<div class='centered-title'>✨ 오늘의 과학 꿀팁 ✨</div>", unsafe_allow_html=True)
 
-st.markdown('</div>', unsafe_allow_html=True)
+# 꿀팁 보여주기
+if 'tip' not in st.session_state:
+    st.session_state.tip = random.choice(tips)
+
+st.markdown(f"<div class='tip-box'>{st.session_state.tip}</div>", unsafe_allow_html=True)
+
+# 버튼을 누르면 새로운 꿀팁
+if st.button("새 꿀팁 보기 🔄"):
+    st.session_state.tip = random.choice(tips)
+    st.experimental_rerun()
